@@ -1,6 +1,6 @@
 # Research Alpha - Scientific Breakthroughs
 
-_Last updated: 2026-02-10T18:21:53Z_
+_Last updated: 2026-02-10T18:33:23Z_
 
 ---
 
@@ -28,6 +28,7 @@ _Last updated: 2026-02-10T18:21:53Z_
 **Timeline:** 2-5 years
 **Confidence:** 50
 **Insight:** Gene therapy - biotech sector
+**Companies:** [JNJ](https://finance.yahoo.com/quote/JNJ) (S&P 500, 70%)
 **Link:** [PubMed](https://pubmed.ncbi.nlm.nih.gov/41497064/)
 **Date:** 2026-02-10
 
@@ -42,6 +43,7 @@ _Last updated: 2026-02-10T18:21:53Z_
 **Timeline:** 2-5 years
 **Confidence:** 60
 **Insight:** Oncology - watch for pharma partnerships
+**Companies:** [JNJ](https://finance.yahoo.com/quote/JNJ) (S&P 500, 70%), [MRK](https://finance.yahoo.com/quote/MRK) (S&P 500, 70%), [ABBV](https://finance.yahoo.com/quote/ABBV) (S&P 500, 70%)
 **Link:** [PubMed](https://pubmed.ncbi.nlm.nih.gov/41437601/)
 **Date:** 2026-02-10
 
@@ -58,6 +60,7 @@ _Last updated: 2026-02-10T18:21:53Z_
 **Timeline:** 2-5 years
 **Confidence:** 50
 **Insight:** Battery tech - EV & grid storage
+**Companies:** [2080.SR](https://finance.yahoo.com/quote/2080.SR) (TASI, 80%), [PLUG](https://finance.yahoo.com/quote/PLUG) (S&P 500, 70%), [BE](https://finance.yahoo.com/quote/BE) (S&P 500, 70%)
 **Link:** [PubMed](https://pubmed.ncbi.nlm.nih.gov/41423630/)
 **Date:** 2026-02-10
 
@@ -72,6 +75,7 @@ _Last updated: 2026-02-10T18:21:53Z_
 **Timeline:** 2-5 years
 **Confidence:** 50
 **Insight:** Solar advance - renewable sector
+**Companies:** [2080.SR](https://finance.yahoo.com/quote/2080.SR) (TASI, 70%)
 **Link:** [PubMed](https://pubmed.ncbi.nlm.nih.gov/41388657/)
 **Date:** 2026-02-10
 
@@ -100,6 +104,7 @@ _Last updated: 2026-02-10T18:21:53Z_
 **Timeline:** 2-5 years
 **Confidence:** 50
 **Insight:** Solar advance - renewable sector
+**Companies:** [ENPH](https://finance.yahoo.com/quote/ENPH) (S&P 500, 70%), [SEDG](https://finance.yahoo.com/quote/SEDG) (S&P 500, 70%), [FSLR](https://finance.yahoo.com/quote/FSLR) (S&P 500, 70%)
 **Link:** [PubMed](https://pubmed.ncbi.nlm.nih.gov/41116313/)
 **Date:** 2026-02-10
 
@@ -114,6 +119,7 @@ _Last updated: 2026-02-10T18:21:53Z_
 **Timeline:** <6 months
 **Confidence:** 65
 **Insight:** Hydrogen - clean energy transition
+**Companies:** [2080.SR](https://finance.yahoo.com/quote/2080.SR) (TASI, 70%)
 **Link:** [PubMed](https://pubmed.ncbi.nlm.nih.gov/41018863/)
 **Date:** 2026-02-10
 
@@ -186,6 +192,7 @@ _Last updated: 2026-02-10T18:21:53Z_
 **Timeline:** 2-5 years
 **Confidence:** 50
 **Insight:** Quantum computing - early stage
+**Companies:** [INTC](https://finance.yahoo.com/quote/INTC) (S&P 500, 70%), [TSM](https://finance.yahoo.com/quote/TSM) (S&P 500, 70%)
 **Link:** [PubMed](https://pubmed.ncbi.nlm.nih.gov/41325223/)
 **Date:** 2026-02-10
 

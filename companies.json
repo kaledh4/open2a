@@ -1,0 +1,45 @@
+{
+  "sp500": {
+    "biotech": [
+      {"ticker": "JNJ", "name": "Johnson & Johnson", "keywords": ["drug", "therapy", "clinical", "fda", "pharmaceutical"]},
+      {"ticker": "PFE", "name": "Pfizer", "keywords": ["vaccine", "drug", "mrna", "immunotherapy"]},
+      {"ticker": "MRK", "name": "Merck", "keywords": ["oncology", "cancer", "drug", "clinical trial"]},
+      {"ticker": "ABBV", "name": "AbbVie", "keywords": ["immunology", "drug", "therapy"]},
+      {"ticker": "MRNA", "name": "Moderna", "keywords": ["mrna", "vaccine", "gene"]},
+      {"ticker": "BNTX", "name": "BioNTech", "keywords": ["mrna", "vaccine", "immunotherapy"]}
+    ],
+    "energy": [
+      {"ticker": "ENPH", "name": "Enphase Energy", "keywords": ["solar", "photovoltaic", "inverter"]},
+      {"ticker": "SEDG", "name": "SolarEdge", "keywords": ["solar", "photovoltaic", "inverter"]},
+      {"ticker": "FSLR", "name": "First Solar", "keywords": ["solar", "thin film", "photovoltaic"]},
+      {"ticker": "PLUG", "name": "Plug Power", "keywords": ["hydrogen", "fuel cell", "electrolyzer"]},
+      {"ticker": "BE", "name": "Bloom Energy", "keywords": ["hydrogen", "fuel cell", "solid oxide"]},
+      {"ticker": "QS", "name": "QuantumScape", "keywords": ["battery", "solid-state", "lithium"]},
+      {"ticker": "ENVX", "name": "Enovix", "keywords": ["battery", "silicon anode", "lithium"]}
+    ],
+    "semiconductor": [
+      {"ticker": "NVDA", "name": "NVIDIA", "keywords": ["ai chip", "gpu", "neural", "datacenter"]},
+      {"ticker": "AMD", "name": "AMD", "keywords": ["ai chip", "gpu", "cpu", "datacenter"]},
+      {"ticker": "INTC", "name": "Intel", "keywords": ["chip", "semiconductor", "foundry"]},
+      {"ticker": "TSM", "name": "TSMC", "keywords": ["foundry", "chip", "semiconductor", "3nm", "5nm"]},
+      {"ticker": "ASML", "name": "ASML", "keywords": ["lithography", "euv", "semiconductor equipment"]},
+      {"ticker": "QCOM", "name": "Qualcomm", "keywords": ["mobile chip", "5g", "semiconductor"]}
+    ],
+    "materials": [
+      {"ticker": "APD", "name": "Air Products", "keywords": ["hydrogen", "industrial gas"]},
+      {"ticker": "FCX", "name": "Freeport-McMoRan", "keywords": ["copper", "mining", "critical minerals"]}
+    ]
+  },
+  "tasi": {
+    "energy": [
+      {"ticker": "2080.SR", "name": "ACWA Power", "keywords": ["renewable", "solar", "hydrogen", "desalination"]},
+      {"ticker": "2222.SR", "name": "Saudi Aramco", "keywords": ["hydrogen", "ccus", "energy transition"]}
+    ],
+    "industrial": [
+      {"ticker": "1830.SR", "name": "ElSeif Engineering", "keywords": ["construction", "infrastructure", "energy"]}
+    ],
+    "materials": [
+      {"ticker": "1301.SR", "name": "Saudi Basic Industries", "keywords": ["chemicals", "materials", "polymers"]}
+    ]
+  }
+}

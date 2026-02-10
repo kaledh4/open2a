@@ -33,12 +33,66 @@ process_papers() {
     # Use python for parsing (more reliable)
     python3 << PYEOF
 import xml.etree.ElementTree as ET
+import json
 import re
 import sys
 
 xml = '''$xml'''
 sector = '$sector'
 date_display = '$DATE_DISPLAY'
+
+# Load companies database
+try:
+    with open('/root/.openclaw/workspace/dash3/companies.json', 'r') as f:
+        companies_db = json.load(f)
+except:
+    companies_db = {"sp500": {}, "tasi": {}}
+
+def find_impacted_companies(title, abstract, sector):
+    """Find companies impacted by this research"""
+    combined = (title + ' ' + abstract).lower()
+    matches = []
+    
+    sector_map = {
+        'Biotech': 'biotech',
+        'Energy': 'energy',
+        'Semiconductor': 'semiconductor',
+        'Materials': 'materials'
+    }
+    
+    sector_key = sector_map.get(sector, sector.lower())
+    
+    # Check S&P 500
+    if sector_key in companies_db.get('sp500', {}):
+        for company in companies_db['sp500'][sector_key]:
+            keyword_matches = sum(1 for kw in company['keywords'] if kw.lower() in combined)
+            if keyword_matches >= 2:  # At least 2 keywords match
+                confidence = min(0.5 + (keyword_matches * 0.1), 0.95)
+                matches.append({
+                    'ticker': company['ticker'],
+                    'name': company['name'],
+                    'exchange': 'S&P 500',
+                    'confidence': round(confidence, 2),
+                    'reasoning': f"Keywords matched: {', '.join(kw for kw in company['keywords'] if kw.lower() in combined)}"
+                })
+    
+    # Check TASI
+    if sector_key in companies_db.get('tasi', {}):
+        for company in companies_db['tasi'][sector_key]:
+            keyword_matches = sum(1 for kw in company['keywords'] if kw.lower() in combined)
+            if keyword_matches >= 2:
+                confidence = min(0.5 + (keyword_matches * 0.1), 0.95)
+                matches.append({
+                    'ticker': company['ticker'],
+                    'name': company['name'],
+                    'exchange': 'TASI',
+                    'confidence': round(confidence, 2),
+                    'reasoning': f"Keywords matched: {', '.join(kw for kw in company['keywords'] if kw.lower() in combined)}"
+                })
+    
+    # Sort by confidence, keep top 3
+    matches.sort(key=lambda x: x['confidence'], reverse=True)
+    return matches[:3]
 
 try:
     root = ET.fromstring(xml)
@@ -125,7 +179,17 @@ try:
             elif sector == 'Materials':
                 insight = 'Advanced materials - multi-sector applications'
             
+            # Find impacted companies
+            impacted = find_impacted_companies(title, abstract, sector)
+            
             # Output
+            companies_md = ''
+            if impacted:
+                companies_md = '\\n**Companies:** ' + ', '.join([
+                    f"[{c['ticker']}](https://finance.yahoo.com/quote/{c['ticker']}) ({c['exchange']}, {int(c['confidence']*100)}%)"
+                    for c in impacted
+                ])
+            
             print(f'''
 ## {title}
 
@@ -133,7 +197,7 @@ try:
 **Region:** {region}
 **Timeline:** {timeline}
 **Confidence:** {confidence}
-**Insight:** {insight}
+**Insight:** {insight}{companies_md}
 **Link:** [PubMed](https://pubmed.ncbi.nlm.nih.gov/{pmid}/)
 **Date:** {date_display}
 
