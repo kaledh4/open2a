@@ -217,6 +217,24 @@
             color: var(--accent-green);
         }
         
+        .paper-companies {
+            background: linear-gradient(135deg, rgba(0, 214, 143, 0.1), rgba(59, 130, 246, 0.1));
+            border: 1px solid var(--accent-green);
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .paper-companies a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        
+        .paper-companies a:hover {
+            text-decoration: underline;
+        }
+        
         .paper-footer {
             display: flex;
             justify-content: space-between;
@@ -394,6 +412,8 @@
                     currentPaper.insight = line.replace('**Insight:**', '').trim();
                 } else if (line.startsWith('**Link:**')) {
                     currentPaper.link = line.split(']')[0].replace('[', '').split('(')[1];
+                } else if (line.startsWith('**Companies:**')) {
+                    currentPaper.companies = line.replace('**Companies:**', '').trim();
                 }
             }
             if (currentPaper) papers.push(currentPaper);
@@ -428,6 +448,7 @@
                     <div class="paper-insight">
                         <strong>Investment Insight:</strong> ${p.insight || 'Analysis pending...'}
                     </div>
+                    ${p.companies ? `<div class="paper-companies"><strong>📈 Companies:</strong> ${p.companies}</div>` : ''}
                     <div class="paper-footer">
                         <span>${p.date || 'Recent'}</span>
                         <div class="confidence">
