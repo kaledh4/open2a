@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research Alpha | Scientific Breakthroughs for Investors</title>
+    <title>Research Alpha | Market-Ready Breakthroughs (&lt;1 Year)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
@@ -321,6 +321,7 @@
                 <div class="logo">
                     <i class="fas fa-atom"></i>
                     Research Alpha
+                    <span style="font-size: 0.7rem; color: var(--accent-green); margin-left: 0.5rem;">&lt;1 Year to Market</span>
                 </div>
                 <div class="last-update" id="lastUpdate">Last update: Loading...</div>
             </div>
@@ -347,11 +348,11 @@
             </div>
             <div class="stat-card">
                 <div class="stat-value orange" id="statHot">0</div>
-                <div class="stat-label">High Impact</div>
+                <div class="stat-label">With Companies</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value purple" id="statShort">0</div>
-                <div class="stat-label">&lt;30 Days</div>
+                <div class="stat-label">&lt;6 Months</div>
             </div>
         </div>
         
@@ -467,8 +468,8 @@
         function updateStats(papers) {
             document.getElementById('statToday').textContent = papers.filter(p => p.isToday).length || papers.length;
             document.getElementById('statWeek').textContent = papers.length;
-            document.getElementById('statHot').textContent = papers.filter(p => p.confidence > 70).length;
-            document.getElementById('statShort').textContent = papers.filter(p => p.tags.timeline?.includes('day') || p.tags.timeline?.includes('week')).length;
+            document.getElementById('statHot').textContent = papers.filter(p => p.companies).length;
+            document.getElementById('statShort').textContent = papers.filter(p => p.tags.timeline?.includes('6') || p.tags.timeline?.includes('months')).length;
         }
         
         // Filter handling
