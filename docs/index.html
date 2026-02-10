@@ -3,41 +3,482 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dash3</title>
+    <title>Research Alpha | Scientific Breakthroughs for Investors</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        :root {
+            --bg-primary: #0a0a0b;
+            --bg-secondary: #141416;
+            --bg-card: #1a1a1e;
+            --border: #2a2a30;
+            --text-primary: #f0f0f0;
+            --text-secondary: #888;
+            --accent-green: #00d68f;
+            --accent-blue: #3b82f6;
+            --accent-orange: #f59e0b;
+            --accent-purple: #a855f7;
+            --accent-red: #ef4444;
+        }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: system-ui, -apple-system, sans-serif;
-            background: #0f0f0f;
-            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             min-height: 100vh;
-            padding: 2rem;
+            line-height: 1.6;
         }
-        h1 { color: #fff; margin-bottom: 1rem; }
-        .card {
-            background: #1a1a1a;
-            border: 1px solid #333;
+        
+        /* Header */
+        .header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo i { color: var(--accent-green); }
+        
+        .last-update {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent-green);
+            color: #000;
+            border-color: var(--accent-green);
+        }
+        
+        /* Main Content */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        /* Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .stat-value.green { color: var(--accent-green); }
+        .stat-value.blue { color: var(--accent-blue); }
+        .stat-value.orange { color: var(--accent-orange); }
+        .stat-value.purple { color: var(--accent-purple); }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Papers Grid */
+        .papers-grid {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .paper-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        
+        .paper-card:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-2px);
+        }
+        
+        .paper-card.high-impact {
+            border-left: 3px solid var(--accent-green);
+        }
+        
+        .paper-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .paper-title {
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .paper-title a {
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        
+        .paper-title a:hover {
+            color: var(--accent-green);
+        }
+        
+        .impact-badge {
+            background: var(--accent-green);
+            color: #000;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        
+        .paper-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .tag {
+            background: var(--bg-secondary);
+            padding: 0.25rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        .tag.sector { color: var(--accent-blue); }
+        .tag.region { color: var(--accent-orange); }
+        .tag.timeline { color: var(--accent-purple); }
+        
+        .paper-insight {
+            background: var(--bg-secondary);
             border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
+            padding: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
         }
-        #result {
-            white-space: pre-wrap;
-            font-family: monospace;
+        
+        .paper-insight strong {
+            color: var(--accent-green);
+        }
+        
+        .paper-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        .confidence {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .confidence-bar {
+            width: 60px;
+            height: 4px;
+            background: var(--bg-secondary);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .confidence-fill {
+            height: 100%;
+            background: var(--accent-green);
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+        
+        .loading i {
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 640px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .filters {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+            
+            .paper-header {
+                flex-direction: column;
+            }
+            
+            .impact-badge {
+                align-self: flex-start;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>📊 dash3</h1>
-    <div class="card">
-        <h2>Result</h2>
-        <div id="result">Loading...</div>
-    </div>
+    <header class="header">
+        <div class="header-content">
+            <div>
+                <div class="logo">
+                    <i class="fas fa-atom"></i>
+                    Research Alpha
+                </div>
+                <div class="last-update" id="lastUpdate">Last update: Loading...</div>
+            </div>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="biotech">🧬 Biotech</button>
+                <button class="filter-btn" data-filter="energy">⚡ Energy</button>
+                <button class="filter-btn" data-filter="materials">🔬 Materials</button>
+                <button class="filter-btn" data-filter="semiconductor">💻 Chips</button>
+            </div>
+        </div>
+    </header>
+    
+    <main class="main">
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-value green" id="statToday">0</div>
+                <div class="stat-label">Today</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value blue" id="statWeek">0</div>
+                <div class="stat-label">This Week</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value orange" id="statHot">0</div>
+                <div class="stat-label">High Impact</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value purple" id="statShort">0</div>
+                <div class="stat-label">&lt;30 Days</div>
+            </div>
+        </div>
+        
+        <div class="papers-grid" id="papersGrid">
+            <div class="loading">
+                <i class="fas fa-spinner"></i> Loading breakthroughs...
+            </div>
+        </div>
+    </main>
+    
     <script>
+        const papersGrid = document.getElementById('papersGrid');
+        const lastUpdate = document.getElementById('lastUpdate');
+        let papers = [];
+        
+        // Parse the markdown data
+        async function loadData() {
+            try {
+                const response = await fetch('resulted.md');
+                const text = await response.text();
+                papers = parseMarkdown(text);
+                renderPapers(papers);
+                updateStats(papers);
+            } catch (e) {
+                papersGrid.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-flask"></i>
+                        <p>No breakthroughs yet. Cron job will populate data soon.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Parse markdown to papers array
+        function parseMarkdown(text) {
+            // Will be populated by cron job
+            // Format defined in resulted.md
+            const lines = text.split('\n');
+            const papers = [];
+            let currentPaper = null;
+            
+            for (const line of lines) {
+                if (line.startsWith('## ')) {
+                    if (currentPaper) papers.push(currentPaper);
+                    currentPaper = {
+                        title: line.replace('## ', '').trim(),
+                        tags: {},
+                        insight: '',
+                        confidence: 50,
+                        link: '#'
+                    };
+                } else if (line.startsWith('**Sector:**')) {
+                    currentPaper.tags.sector = line.split(':')[1].trim();
+                } else if (line.startsWith('**Region:**')) {
+                    currentPaper.tags.region = line.split(':')[1].trim();
+                } else if (line.startsWith('**Timeline:**')) {
+                    currentPaper.tags.timeline = line.split(':')[1].trim();
+                } else if (line.startsWith('**Insight:**')) {
+                    currentPaper.insight = line.replace('**Insight:**', '').trim();
+                } else if (line.startsWith('**Link:**')) {
+                    currentPaper.link = line.split(']')[0].replace('[', '').split('(')[1];
+                }
+            }
+            if (currentPaper) papers.push(currentPaper);
+            return papers;
+        }
+        
+        // Render papers
+        function renderPapers(papersToShow) {
+            if (papersToShow.length === 0) {
+                papersGrid.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <p>No papers match this filter.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            papersGrid.innerHTML = papersToShow.map(p => `
+                <article class="paper-card ${p.confidence > 70 ? 'high-impact' : ''}">
+                    <div class="paper-header">
+                        <h3 class="paper-title">
+                            <a href="${p.link}" target="_blank">${p.title}</a>
+                        </h3>
+                        ${p.confidence > 70 ? '<span class="impact-badge">HIGH IMPACT</span>' : ''}
+                    </div>
+                    <div class="paper-meta">
+                        ${p.tags.sector ? `<span class="tag sector">${p.tags.sector}</span>` : ''}
+                        ${p.tags.region ? `<span class="tag region">${p.tags.region}</span>` : ''}
+                        ${p.tags.timeline ? `<span class="tag timeline">${p.tags.timeline}</span>` : ''}
+                    </div>
+                    <div class="paper-insight">
+                        <strong>Investment Insight:</strong> ${p.insight || 'Analysis pending...'}
+                    </div>
+                    <div class="paper-footer">
+                        <span>${p.date || 'Recent'}</span>
+                        <div class="confidence">
+                            <span>Confidence</span>
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" style="width: ${p.confidence}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+        
+        // Update stats
+        function updateStats(papers) {
+            document.getElementById('statToday').textContent = papers.filter(p => p.isToday).length || papers.length;
+            document.getElementById('statWeek').textContent = papers.length;
+            document.getElementById('statHot').textContent = papers.filter(p => p.confidence > 70).length;
+            document.getElementById('statShort').textContent = papers.filter(p => p.tags.timeline?.includes('day') || p.tags.timeline?.includes('week')).length;
+        }
+        
+        // Filter handling
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                if (filter === 'all') {
+                    renderPapers(papers);
+                } else {
+                    const filtered = papers.filter(p => 
+                        p.tags.sector?.toLowerCase().includes(filter)
+                    );
+                    renderPapers(filtered);
+                }
+            });
+        });
+        
+        // Update timestamp
         fetch('resulted.md')
-            .then(r => r.text())
-            .then(t => document.getElementById('result').textContent = t)
-            .catch(e => document.getElementById('result').textContent = 'No data yet');
+            .then(r => r.headers.get('last-modified'))
+            .then(date => {
+                if (date) {
+                    lastUpdate.textContent = `Last update: ${new Date(date).toLocaleString()}`;
+                } else {
+                    lastUpdate.textContent = 'Last update: Awaiting cron...';
+                }
+            });
+        
+        loadData();
     </script>
 </body>
 </html>
