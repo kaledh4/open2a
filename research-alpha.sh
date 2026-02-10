@@ -119,6 +119,18 @@ try:
             if any(x in combined for x in ['united states', 'american', 'usa', 'saudi', 'ksa']):
                 continue
             
+            # Skip if not market-ready within 1 year
+            timeline = '2-5 years'
+            if any(x in abstract.lower() for x in ['clinical trial', 'phase iii', 'commercial', 'market launch', 'fda approved', 'approved']):
+                timeline = '<6 months'
+            elif any(x in abstract.lower() for x in ['phase ii', 'prototype', 'pilot', 'production', 'scaling']):
+                timeline = '<1 year'
+            elif any(x in abstract.lower() for x in ['phase i', 'proof of concept', 'theoretical', 'simulation']):
+                continue  # Skip - too early
+            
+            if timeline == '2-5 years':
+                continue  # Skip - not market ready
+            
             # Region
             region = 'International'
             if any(x in abstract.lower() for x in ['china', 'chinese', 'beijing']):
@@ -135,15 +147,6 @@ try:
                 region = 'France'
             elif 'israel' in abstract.lower():
                 region = 'Israel'
-            
-            # Timeline
-            timeline = '2-5 years'
-            if any(x in abstract.lower() for x in ['clinical trial', 'phase iii', 'commercial', 'market launch']):
-                timeline = '<6 months'
-            elif any(x in abstract.lower() for x in ['phase ii', 'prototype', 'pilot']):
-                timeline = '<1 year'
-            elif any(x in abstract.lower() for x in ['phase i', 'proof of concept']):
-                timeline = '1-3 years'
             
             # Confidence
             confidence = 50
