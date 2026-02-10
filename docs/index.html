@@ -340,15 +340,15 @@
         <div class="stats-bar">
             <div class="stat-card">
                 <div class="stat-value green" id="statToday">0</div>
-                <div class="stat-label">Today</div>
+                <div class="stat-label">Papers</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value blue" id="statWeek">0</div>
-                <div class="stat-label">This Week</div>
+                <div class="stat-value blue" id="statSP500">0</div>
+                <div class="stat-label">📈 S&P 500</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value orange" id="statHot">0</div>
-                <div class="stat-label">With Companies</div>
+                <div class="stat-value orange" id="statTASI">0</div>
+                <div class="stat-label">🏛️ TASI</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value purple" id="statShort">0</div>
@@ -367,6 +367,25 @@
         const papersGrid = document.getElementById('papersGrid');
         const lastUpdate = document.getElementById('lastUpdate');
         let papers = [];
+        
+        // Convert markdown links to HTML
+        function markdownToHtml(text) {
+            return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+        }
+        
+        // Count companies by exchange
+        function countCompanies(papers) {
+            let sp500 = 0, tasi = 0;
+            papers.forEach(p => {
+                if (p.companies) {
+                    const sp500Matches = p.companies.match(/S&P 500/g) || [];
+                    const tasiMatches = p.companies.match(/TASI/g) || [];
+                    sp500 += sp500Matches.length;
+                    tasi += tasiMatches.length;
+                }
+            });
+            return { sp500, tasi };
+        }
         
         // Parse the markdown data
         async function loadData() {
@@ -450,7 +469,7 @@
                     <div class="paper-insight">
                         <strong>Investment Insight:</strong> ${p.insight || 'Analysis pending...'}
                     </div>
-                    ${p.companies ? `<div class="paper-companies"><strong>📈 Companies:</strong> ${p.companies}</div>` : ''}
+                    ${p.companies ? `<div class="paper-companies"><strong>📈 Companies:</strong> ${markdownToHtml(p.companies)}</div>` : ''}
                     <div class="paper-footer">
                         <span>${p.date || 'Recent'}</span>
                         <div class="confidence">
@@ -466,9 +485,10 @@
         
         // Update stats
         function updateStats(papers) {
-            document.getElementById('statToday').textContent = papers.filter(p => p.isToday).length || papers.length;
-            document.getElementById('statWeek').textContent = papers.length;
-            document.getElementById('statHot').textContent = papers.filter(p => p.companies).length;
+            document.getElementById('statToday').textContent = papers.length;
+            const counts = countCompanies(papers);
+            document.getElementById('statSP500').textContent = counts.sp500;
+            document.getElementById('statTASI').textContent = counts.tasi;
             document.getElementById('statShort').textContent = papers.filter(p => p.tags.timeline?.includes('6') || p.tags.timeline?.includes('months')).length;
         }
         
