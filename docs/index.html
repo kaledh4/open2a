@@ -432,7 +432,8 @@
                 } else if (line.startsWith('**Insight:**')) {
                     currentPaper.insight = line.replace('**Insight:**', '').trim();
                 } else if (line.startsWith('**Link:**')) {
-                    currentPaper.link = line.split(']')[0].replace('[', '').split('(')[1];
+                    const match = line.match(/\(([^)]+)\)/);
+                    currentPaper.link = match ? match[1] : '#';
                 } else if (line.startsWith('**Companies:**')) {
                     currentPaper.companies = line.replace('**Companies:**', '').trim();
                 }
